@@ -139,7 +139,7 @@ static Key keys[] = {
 	{ MODKEY,						XK_r,	   spawn,		   {.v = filecmd} },
 	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },
 	{ MODKEY,						XK_p,	   spawn,		   SHCMD("picom --experimental-backends") },
-	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("feh --bg-scale --randomize ~/git/Wallpapers/Walls") },
+	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("feh --bg-scale --randomize ~/Wallpapers/Walls") },
 
 	/*Keyboard keys*/
 	{ 0, XF86XK_AudioMute,			spawn,		SHCMD("pamixer -t; dunstify -r 2 -t 750 \"VOL:$(pamixer --get-volume-human)\"") },
