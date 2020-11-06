@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
+static const unsigned int gappx     = 8;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -39,7 +39,7 @@ static const Rule rules[] = {
 	{ "zoom",			NULL,			NULL,			1,			0,			1,			-1,			 0  },
 	{ "qBittorrent",	NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{ "GParted",		NULL,			NULL,			0,			0,			1,			-1,			 0  },
-	{ "Spotify",		NULL,			NULL,			3,			0,			0,			-1,			 0	},
+	{ "spotify",		NULL,			NULL,			3,			0,			0,			-1,			 0	},
 	{  NULL,			NULL,			"scratchpad",	0,          1,          1,          -1,			's' },
 	{ "gotopcmd",		NULL,			NULL,			0,			1,			1,			-1,			'g' },
 	{ "bccmd",			NULL,	        NULL,           0,          1,          1,          -1,         'c' },
@@ -56,6 +56,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -104,9 +106,11 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,						XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ControlMask,           XK_q,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ControlMask,           XK_w,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ControlMask,			XK_e,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ControlMask,           XK_r,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY|ControlMask,           XK_t,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },

@@ -1,11 +1,11 @@
 --- x.c
 +++ x.c
-@@ -1594,8 +1594,6 @@ xsettitle(char *p)
- int
- xstartdraw(void)
- {
--	if (IS_SET(MODE_VISIBLE))
--		XCopyArea(xw.dpy, xw.win, xw.buf, dc.gc, 0, 0, win.w, win.h, 0, 0);
- 	return IS_SET(MODE_VISIBLE);
- }
+@@ -1118,8 +1132,6 @@ xinit(int cols, int rows)
+ 	pid_t thispid = getpid();
+ 	XColor xmousefg, xmousebg;
+ 
+-	if (!(xw.dpy = XOpenDisplay(NULL)))
+-		die("can't open display\n");
+ 	xw.scr = XDefaultScreen(xw.dpy);
+ 	xw.vis = XDefaultVisual(xw.dpy, xw.scr);
  

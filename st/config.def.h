@@ -5,9 +5,9 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "FiraMono Nerd Font:pixelsize=22:antialias=true:autohint=true";
-static char *font2 = "Symbola:pixelsize=22:antialias=true:autohint=true";
-static int borderpx = 6;
+static char *font = "FiraMono Nerd Font:pixelsize=21:antialias=true:autohint=true";
+static char *font2 = "Symbola:pixelsize=21:antialias=true:autohint=true";
+static int borderpx = 10;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -130,6 +130,10 @@ static const char *colorname[] = {
   [13] = "#d3869b", /* magenta */
   [14] = "#8ec07c", /* cyan    */
   [15] = "#ebdbb2", /* white   */
+  
+  "#cccccc",
+  "#555555",
+  "black",
 };
 
 /*
@@ -139,9 +143,7 @@ static const char *colorname[] = {
 unsigned int defaultfg = 15;
 unsigned int defaultbg = 0;
 static unsigned int defaultcs = 15;
-static unsigned int defaultrcs = 257;
-
-
+static unsigned int defaultrcs = 257; 
 /*
  * Default shape of cursor
  * 2: Block ("█")

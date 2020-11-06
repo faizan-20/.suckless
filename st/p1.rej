@@ -1,133 +1,106 @@
---- Makefile
-+++ Makefile
-@@ -4,7 +4,7 @@
- 
- include config.mk
- 
--SRC = st.c x.c
-+SRC = st.c x.c boxdraw.c
- OBJ = $(SRC:.c=.o)
- 
- all: options st
-@@ -23,6 +23,7 @@ config.h:
- 
- st.o: config.h st.h win.h
- x.o: arg.h config.h st.h win.h
-+boxdraw.o: config.h st.h boxdraw_data.h
- 
- $(OBJ): config.h config.mk
- 
 --- config.def.h
 +++ config.def.h
-@@ -58,6 +58,18 @@ static unsigned int blinktimeout = 800;
+@@ -150,6 +150,41 @@ static unsigned int mousebg = 0;
   */
- static unsigned int cursorthickness = 2;
+ static unsigned int defaultattr = 11;
  
 +/*
-+ * 1: render most of the lines/blocks characters without using the font for
-+ *    perfect alignment between cells (U2500 - U259F except dashes/diagonals).
-+ *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
-+ * 0: disable (render all U25XX glyphs normally from the font).
++ * Xresources preferences to load at startup
 + */
-+const int boxdraw = 0;
-+const int boxdraw_bold = 0;
-+
-+/* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
-+const int boxdraw_braille = 0;
++ResourcePref resources[] = {
++		{ "font",         STRING,  &font },
++		{ "color0",       STRING,  &colorname[0] },
++		{ "color1",       STRING,  &colorname[1] },
++		{ "color2",       STRING,  &colorname[2] },
++		{ "color3",       STRING,  &colorname[3] },
++		{ "color4",       STRING,  &colorname[4] },
++		{ "color5",       STRING,  &colorname[5] },
++		{ "color6",       STRING,  &colorname[6] },
++		{ "color7",       STRING,  &colorname[7] },
++		{ "color8",       STRING,  &colorname[8] },
++		{ "color9",       STRING,  &colorname[9] },
++		{ "color10",      STRING,  &colorname[10] },
++		{ "color11",      STRING,  &colorname[11] },
++		{ "color12",      STRING,  &colorname[12] },
++		{ "color13",      STRING,  &colorname[13] },
++		{ "color14",      STRING,  &colorname[14] },
++		{ "color15",      STRING,  &colorname[15] },
++		{ "background",   STRING,  &colorname[256] },
++		{ "foreground",   STRING,  &colorname[257] },
++		{ "cursorColor",  STRING,  &colorname[258] },
++		{ "termname",     STRING,  &termname },
++		{ "shell",        STRING,  &shell },
++		{ "xfps",         INTEGER, &xfps },
++		{ "actionfps",    INTEGER, &actionfps },
++		{ "blinktimeout", INTEGER, &blinktimeout },
++		{ "bellvolume",   INTEGER, &bellvolume },
++		{ "tabspaces",    INTEGER, &tabspaces },
++		{ "cwscale",      FLOAT,   &cwscale },
++		{ "chscale",      FLOAT,   &chscale },
++};
 +
  /*
-  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
-  * it
---- st.c
-+++ st.c
-@@ -1230,6 +1230,9 @@ tsetchar(Rune u, Glyph *attr, int x, int y)
- 	term.dirty[y] = 1;
- 	term.line[y][x] = *attr;
- 	term.line[y][x].u = u;
-+
-+	if (isboxdraw(u))
-+		term.line[y][x].mode |= ATTR_BOXDRAW;
- }
- 
- void
---- st.h
-+++ st.h
-@@ -33,6 +33,7 @@ enum glyph_attribute {
- 	ATTR_WRAP       = 1 << 8,
- 	ATTR_WIDE       = 1 << 9,
- 	ATTR_WDUMMY     = 1 << 10,
-+	ATTR_BOXDRAW    = 1 << 11,
- 	ATTR_BOLD_FAINT = ATTR_BOLD | ATTR_FAINT,
- };
- 
-@@ -111,6 +112,14 @@ void *xmalloc(size_t);
- void *xrealloc(void *, size_t);
- char *xstrdup(char *);
- 
-+int isboxdraw(Rune);
-+ushort boxdrawindex(const Glyph *);
-+#ifdef XFT_VERSION
-+/* only exposed to x.c, otherwise we'll need Xft.h for the types */
-+void boxdraw_xinit(Display *, Colormap, XftDraw *, Visual *);
-+void drawboxes(int, int, int, int, XftColor *, XftColor *, const XftGlyphFontSpec *, int);
-+#endif
-+
- /* config.h globals */
- extern char *utmp;
- extern char *scroll;
-@@ -122,3 +131,4 @@ extern char *termname;
- extern unsigned int tabspaces;
- extern unsigned int defaultfg;
- extern unsigned int defaultbg;
-+extern const int boxdraw, boxdraw_bold, boxdraw_braille;
+  * Internal mouse shortcuts.
+  * Beware that overloading Button1 will disable the selection.
 --- x.c
 +++ x.c
-@@ -1205,6 +1205,8 @@ xinit(int cols, int rows)
- 	xsel.xtarget = XInternAtom(xw.dpy, "UTF8_STRING", 0);
- 	if (xsel.xtarget == None)
- 		xsel.xtarget = XA_STRING;
+@@ -14,6 +14,7 @@
+ #include <X11/keysym.h>
+ #include <X11/Xft/Xft.h>
+ #include <X11/XKBlib.h>
++#include <X11/Xresource.h>
+ 
+ static char *argv0;
+ #include "arg.h"
+@@ -43,6 +44,19 @@ typedef struct {
+ 	signed char appcursor; /* application cursor */
+ } Key;
+ 
++/* Xresources preferences */
++enum resource_type {
++	STRING = 0,
++	INTEGER = 1,
++	FLOAT = 2
++};
 +
-+	boxdraw_xinit(xw.dpy, xw.cmap, xw.draw, xw.vis);
- }
++typedef struct {
++	char *name;
++	enum resource_type type;
++	void *dst;
++} ResourcePref;
++
+ /* X modifiers */
+ #define XK_ANY_MOD    UINT_MAX
+ #define XK_NO_MOD     0
+@@ -778,8 +792,8 @@ xclear(int x1, int y1, int x2, int y2)
+ void
+ xhints(void)
+ {
+-	XClassHint class = {opt_name ? opt_name : termname,
+-	                    opt_class ? opt_class : termname};
++	XClassHint class = {opt_name ? opt_name : "st",
++	                    opt_class ? opt_class : "St"};
+ 	XWMHints wm = {.flags = InputHint, .input = 1};
+ 	XSizeHints *sizeh;
  
- int
-@@ -1251,8 +1253,13 @@ xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x
- 			yp = winy + font->ascent;
- 		}
+@@ -999,8 +1013,6 @@ xinit(int cols, int rows)
+ 	pid_t thispid = getpid();
+ 	XColor xmousefg, xmousebg;
  
--		/* Lookup character index with default font. */
--		glyphidx = XftCharIndex(xw.dpy, font->match, rune);
-+		if (mode & ATTR_BOXDRAW) {
-+			/* minor shoehorning: boxdraw uses only this ushort */
-+			glyphidx = boxdrawindex(&glyphs[i]);
-+		} else {
-+			/* Lookup character index with default font. */
-+			glyphidx = XftCharIndex(xw.dpy, font->match, rune);
-+		}
- 		if (glyphidx) {
- 			specs[numspecs].font = font->match;
- 			specs[numspecs].glyph = glyphidx;
-@@ -1456,8 +1463,12 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
- 	r.width = width;
- 	XftDrawSetClipRectangles(xw.draw, winx, winy, &r, 1);
+-	if (!(xw.dpy = XOpenDisplay(NULL)))
+-		die("Can't open display\n");
+ 	xw.scr = XDefaultScreen(xw.dpy);
+ 	xw.vis = XDefaultVisual(xw.dpy, xw.scr);
  
--	/* Render the glyphs. */
--	XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
-+	if (base.mode & ATTR_BOXDRAW) {
-+		drawboxes(winx, winy, width / len, win.ch, fg, bg, specs, len);
-+	} else {
-+		/* Render the glyphs. */
-+		XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
-+	}
- 
- 	/* Render underline and strikethrough. */
- 	if (base.mode & ATTR_UNDERLINE) {
-@@ -1500,7 +1511,7 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
- 	/*
- 	 * Select the right color for the right mode.
- 	 */
--	g.mode &= ATTR_BOLD|ATTR_ITALIC|ATTR_UNDERLINE|ATTR_STRUCK|ATTR_WIDE;
-+	g.mode &= ATTR_BOLD|ATTR_ITALIC|ATTR_UNDERLINE|ATTR_STRUCK|ATTR_WIDE|ATTR_BOXDRAW;
- 
- 	if (IS_SET(MODE_REVERSE)) {
- 		g.mode |= ATTR_REVERSE;
+@@ -1990,6 +2055,11 @@ run:
+ 	}
+ 	setlocale(LC_CTYPE, "");
+ 	XSetLocaleModifiers("");
++
++	if(!(xw.dpy = XOpenDisplay(NULL)))
++		die("Can't open display\n");
++
++	config_init();
+ 	cols = MAX(cols, 1);
+ 	rows = MAX(rows, 1);
+ 	tnew(cols, rows);

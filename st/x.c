@@ -1862,7 +1862,7 @@ kmap(KeySym k, uint state)
 	}
 
 	for (kp = key; kp < key + LEN(key); kp++) {
-		if (kp->k != k)
+	if (kp->k != k)
 			continue;
 
 		if (!match(kp->mask, state))
