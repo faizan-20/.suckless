@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "FiraMono Nerd Font:pixelsize=21:antialias=true:autohint=true";
-static char *font2 = "Symbola:pixelsize=21:antialias=true:autohint=true";
+static char *font = "SauceCodePro Nerd Font:pixelsize=22:antialias=true:autohint=true";
+static char *font2 = "Symbola:pixelsize=22:antialias=true:autohint=true";
 static int borderpx = 10;
 
 /*
@@ -130,10 +130,6 @@ static const char *colorname[] = {
   [13] = "#d3869b", /* magenta */
   [14] = "#8ec07c", /* cyan    */
   [15] = "#ebdbb2", /* white   */
-  
-  "#cccccc",
-  "#555555",
-  "black",
 };
 
 /*

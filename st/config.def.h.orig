@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "FiraMono Nerd Font:pixelsize=21:antialias=true:autohint=true";
-static char *font2 = "Symbola:pixelsize=21:antialias=true:autohint=true";
+static char *font = "SauceCodePro Nerd Font:pixelsize=22:antialias=true:autohint=true";
+static char *font2 = "Symbola:pixelsize=22:antialias=true:autohint=true";
 static int borderpx = 10;
 
 /*
@@ -106,10 +106,13 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 4;
 
+/* bg opacity */
+float alpha = 0.8, alphaUnfocused = 0.6;
+
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 /* 8 normal colors */
-  [0] = "#282828", /*default: #282828 hard contrast: #1d2021 / soft contrast: #32302f */
+  [0] = "#1d2021", /*default: #282828 hard contrast: #1d2021 / soft contrast: #32302f */
   [1] = "#cc241d", /* red     */
   [2] = "#98971a", /* green   */
   [3] = "#d79921", /* yellow  */
@@ -137,6 +140,7 @@ unsigned int defaultfg = 15;
 unsigned int defaultbg = 0;
 static unsigned int defaultcs = 15;
 static unsigned int defaultrcs = 257; 
+unsigned int bg = 0, bgUnfocused = 0;
 /*
  * Default shape of cursor
  * 2: Block ("█")
