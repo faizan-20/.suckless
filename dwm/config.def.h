@@ -10,8 +10,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "FiraCode Nerd Font:size=12" };
-static const char dmenufont[]       = "FiraCode Nerd Font:size=12";
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=12" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=12";
 static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#a89984";
@@ -40,10 +40,12 @@ static const Rule rules[] = {
 	{  "qBittorrent",	NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "GParted",		NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "spotify",		NULL,			NULL,			3,			0,			0,			-1,			 0	},
+    {  "xdman-Main",    NULL,           NULL,           0,          0,          1,          -1,          0  },
 	{  NULL,			NULL,			"scratchpad",	0,          1,          1,          -1,			's' },
 	{  NULL,			NULL,			"gotopcmd",		0,			1,			1,			-1,			'g' },
 	{  NULL,			NULL,	        "bccmd",        0,          1,          1,          -1,         'c' },
-	{  NULL,			NULL,			"pulsemixercmd", 0,         1,          1,          -1,         'p' },
+	{  "pulsemixercmd",	NULL,			NULL,           0,          1,          1,          -1,         'p' },
+    {  "filecmd",       NULL,           NULL,           0,          1,          1,          -1,         'f' },
 };
 
 /* layout(s) */
@@ -75,12 +77,12 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char *filecmd[]		= {"alacritty", "-e", "ranger", NULL};
 
 static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
 static const char *gotopcmd[]		= {"g", "st", "-t", "gotopcmd", "-e", "gotop", NULL}; 
 static const char *bccmd[]			= {"c", "st", "-t", "bccmd", "-g", "40x20", "-e", "bc", "-lq", NULL};
-static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "pulsemixer", NULL}; 
+static const char *pulsemixercmd[]	= {"p", "st", "-c", "pulsemixercmd", "-e", "pulsemixer", NULL}; 
+static const char *filecmd[]        = {"f", "st", "-c", "filecmd",       "-e", "~/.config/vifm/scripts/vifmrun", NULL};
 
 
 
@@ -93,6 +95,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_a,      togglescratch,  {.v = pulsemixercmd } },
 	{ MODKEY,                       XK_s,      togglescratch,  {.v = gotopcmd } },
 	{ MODKEY,                       XK_c,      togglescratch,  {.v = bccmd } },
+    { MODKEY,                       XK_f,      togglescratch,  {.v = filecmd} },
 
 //	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun") },	
 	{ MODKEY,			            XK_Return, spawn,          {.v = termcmd } },
@@ -137,10 +140,9 @@ static Key keys[] = {
 	/*Applications*/
 	{ 0,							XK_Print,  spawn,		   SHCMD("xfce4-screenshooter") },
 	{ MODKEY,						XK_w,	   spawn,		   SHCMD("firefox") },
-	{ MODKEY,						XK_e,	   spawn,		   SHCMD("nemo") },
+	{ MODKEY,						XK_e,	   spawn,		   SHCMD("pcmanfm") },
 	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("betterlockscreen -l dim") },
 	{ MODKEY|ShiftMask,				XK_s,	   spawn,		   SHCMD("LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify") },
-	{ MODKEY,						XK_r,	   spawn,		   {.v = filecmd} },
 	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },
 	{ MODKEY,						XK_p,	   spawn,		   SHCMD("picom --experimental-backends") },
 	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("feh --bg-fill --randomize ~/Wallpapers/Walls") },
