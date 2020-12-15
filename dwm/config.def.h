@@ -11,7 +11,7 @@ static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=12" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=12";
+static const char dmenufont[]       = "SF Pro Display:size=12";
 static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#a89984";
@@ -45,7 +45,6 @@ static const Rule rules[] = {
 	{  NULL,			NULL,			"gotopcmd",		0,			1,			1,			-1,			'g' },
 	{  NULL,			NULL,	        "bccmd",        0,          1,          1,          -1,         'c' },
 	{  "pulsemixercmd",	NULL,			NULL,           0,          1,          1,          -1,         'p' },
-    {  "filecmd",       NULL,           NULL,           0,          1,          1,          -1,         'f' },
 };
 
 /* layout(s) */
@@ -82,9 +81,6 @@ static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
 static const char *gotopcmd[]		= {"g", "st", "-t", "gotopcmd", "-e", "gotop", NULL}; 
 static const char *bccmd[]			= {"c", "st", "-t", "bccmd", "-g", "40x20", "-e", "bc", "-lq", NULL};
 static const char *pulsemixercmd[]	= {"p", "st", "-c", "pulsemixercmd", "-e", "pulsemixer", NULL}; 
-static const char *filecmd[]        = {"f", "st", "-c", "filecmd",       "-e", "~/.config/vifm/scripts/vifmrun", NULL};
-
-
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
@@ -95,7 +91,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_a,      togglescratch,  {.v = pulsemixercmd } },
 	{ MODKEY,                       XK_s,      togglescratch,  {.v = gotopcmd } },
 	{ MODKEY,                       XK_c,      togglescratch,  {.v = bccmd } },
-    { MODKEY,                       XK_f,      togglescratch,  {.v = filecmd} },
 
 //	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun") },	
 	{ MODKEY,			            XK_Return, spawn,          {.v = termcmd } },
@@ -140,7 +135,7 @@ static Key keys[] = {
 	/*Applications*/
 	{ 0,							XK_Print,  spawn,		   SHCMD("xfce4-screenshooter") },
 	{ MODKEY,						XK_w,	   spawn,		   SHCMD("firefox") },
-	{ MODKEY,						XK_e,	   spawn,		   SHCMD("pcmanfm") },
+	{ MODKEY,						XK_e,	   spawn,		   SHCMD("dolphin") },
 	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("betterlockscreen -l dim") },
 	{ MODKEY|ShiftMask,				XK_s,	   spawn,		   SHCMD("LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify") },
 	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },
@@ -148,11 +143,11 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("feh --bg-fill --randomize ~/Wallpapers/Walls") },
 
 	/*Keyboard keys*/
-	{ 0, XF86XK_AudioMute,			spawn,		SHCMD("pamixer -t; dunstify -r 2 -t 750 \"VOL:$(pamixer --get-volume-human)\"") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 5; dunstify -r 2 -t 750 \" :$(pamixer --get-volume-human)\"") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 5; dunstify -r 2 -t 750 \" :$(pamixer --get-volume-human)\"") },
-	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 5; dunstify -r 2 -t 750 \" :$(xbacklight -get | awk '{print int($1)}')\"") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 5; dunstify -r 2 -t 750 \" :$(xbacklight -get | awk '{print int($1)}')\"") },
+  { 0, XF86XK_AudioMute,			spawn,		SHCMD("pamixer -t; dunstify -r 2 -t 750 \"VOL:$(pamixer --get-volume-human)\"") },
+  { 0, XF86XK_AudioRaiseVolume,	    spawn,		SHCMD("pamixer --allow-boost -i 5; dunstify -r 2 -t 750 \" :$(pamixer --get-volume-human)\"") },
+  { 0, XF86XK_AudioLowerVolume,	    spawn,		SHCMD("pamixer --allow-boost -d 5; dunstify -r 2 -t 750 \" :$(pamixer --get-volume-human)\"") },
+  { 0, XF86XK_MonBrightnessUp,	    spawn,		SHCMD("xbacklight -inc 5; dunstify -r 2 -t 750 \" :$(xbacklight -get | awk '{print int($1)}')\"") },
+  { 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 5; dunstify -r 2 -t 750 \" :$(xbacklight -get | awk '{print int($1)}')\"") },
 };
 
 /* button definitions */
