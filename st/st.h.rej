@@ -1,8 +1,7 @@
 --- st.h
 +++ st.h
-@@ -122,4 +121,4 @@ extern char *termname;
+@@ -120,3 +120,4 @@ extern char *termname;
  extern unsigned int tabspaces;
  extern unsigned int defaultfg;
  extern unsigned int defaultbg;
--extern float alpha, alphaUnfocused;
 +extern float alpha;

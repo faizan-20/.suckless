@@ -39,6 +39,7 @@ static const Rule rules[] = {
 	{  "zoom",			NULL,			NULL,			1,			0,			1,			-1,			 0  },
 	{  "qBittorrent",	NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "GParted",		NULL,			NULL,			0,			0,			1,			-1,			 0  },
+	{  "Timeshift-gtk",	NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "spotify",		NULL,			NULL,			3,			0,			0,			-1,			 0	},
     {  "xdman-Main",    NULL,           NULL,           0,          0,          1,          -1,          0  },
 	{  NULL,			NULL,			"scratchpad",	0,          1,          1,          -1,			's' },
@@ -75,7 +76,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
 static const char *gotopcmd[]		= {"g", "st", "-t", "gotopcmd", "-e", "gotop", NULL}; 
@@ -135,7 +136,7 @@ static Key keys[] = {
 	/*Applications*/
 	{ 0,							XK_Print,  spawn,		   SHCMD("xfce4-screenshooter") },
 	{ MODKEY,						XK_w,	   spawn,		   SHCMD("firefox") },
-	{ MODKEY,						XK_e,	   spawn,		   SHCMD("dolphin") },
+	{ MODKEY,						XK_e,	   spawn,		   SHCMD("thunar") },
 	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("betterlockscreen -l dim") },
 	{ MODKEY|ShiftMask,				XK_s,	   spawn,		   SHCMD("LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify") },
 	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },

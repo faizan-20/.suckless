@@ -111,25 +111,31 @@ float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-/* 8 normal colors */
-  [0] = "#1d2021", /*default: #282828 hard contrast: #1d2021 / soft contrast: #32302f */
-  [1] = "#cc241d", /* red     */
-  [2] = "#98971a", /* green   */
-  [3] = "#d79921", /* yellow  */
-  [4] = "#458588", /* blue    */
-  [5] = "#b16286", /* magenta */
-  [6] = "#689d6a", /* cyan    */
-  [7] = "#a89984", /* white   */
+   /* 8 normal colors */
+   "#282828", /*default: #282828 hard contrast: #1d2021 / soft contrast: #32302f */
+   "#cc241d", /* red     */
+   "#98971a", /* green   */
+   "#d79921", /* yellow  */
+   "#458588", /* blue    */
+   "#b16286", /* magenta */
+   "#689d6a", /* cyan    */
+   "#a89984", /* white   */
 
-  /* 8 bright colors */
-  [8]  = "#928374", /* black   */
-  [9]  = "#fb4934", /* red     */
-  [10] = "#b8bb26", /* green   */
-  [11] = "#fabd2f", /* yellow  */
-  [12] = "#83a598", /* blue    */
-  [13] = "#d3869b", /* magenta */
-  [14] = "#8ec07c", /* cyan    */
-  [15] = "#ebdbb2", /* white   */
+   /* 8 bright colors */
+   "#928374", /* black   */
+   "#fb4934", /* red     */
+   "#b8bb26", /* green   */
+   "#fabd2f", /* yellow  */
+   "#83a598", /* blue    */
+   "#d3869b", /* magenta */
+   "#8ec07c", /* cyan    */
+   "#ebdbb2", /* white   */
+   [255] = 0,
+
+   "#add8e6",
+   "#555555",
+   "#282828",
+   "#ebdbb2",
 };
 
 /*
@@ -137,9 +143,9 @@ static const char *colorname[] = {
  * foreground, background, cursor, reverse cursor
  */
 unsigned int defaultfg = 15;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 15;
-static unsigned int defaultrcs = 257; 
+unsigned int defaultbg = 258;
+unsigned int defaultcs = 15;
+unsigned int defaultrcs = 257; 
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -175,6 +181,42 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+		{ "font",         STRING,  &font },
+		{ "color0",       STRING,  &colorname[0] },
+		{ "color1",       STRING,  &colorname[1] },
+		{ "color2",       STRING,  &colorname[2] },
+		{ "color3",       STRING,  &colorname[3] },
+		{ "color4",       STRING,  &colorname[4] },
+		{ "color5",       STRING,  &colorname[5] },
+		{ "color6",       STRING,  &colorname[6] },
+		{ "color7",       STRING,  &colorname[7] },
+		{ "color8",       STRING,  &colorname[8] },
+		{ "color9",       STRING,  &colorname[9] },
+		{ "color10",      STRING,  &colorname[10] },
+		{ "color11",      STRING,  &colorname[11] },
+		{ "color12",      STRING,  &colorname[12] },
+		{ "color13",      STRING,  &colorname[13] },
+		{ "color14",      STRING,  &colorname[14] },
+		{ "color15",      STRING,  &colorname[15] },
+		{ "background",   STRING,  &colorname[256] },
+		{ "foreground",   STRING,  &colorname[257] },
+		{ "cursorColor",  STRING,  &colorname[258] },
+		{ "termname",     STRING,  &termname },
+		{ "shell",        STRING,  &shell },
+		{ "minlatency",   INTEGER, &minlatency },
+		{ "maxlatency",   INTEGER, &maxlatency },
+		{ "blinktimeout", INTEGER, &blinktimeout },
+		{ "bellvolume",   INTEGER, &bellvolume },
+		{ "tabspaces",    INTEGER, &tabspaces },
+		{ "borderpx",     INTEGER, &borderpx },
+		{ "cwscale",      FLOAT,   &cwscale },
+		{ "chscale",      FLOAT,   &chscale },
+};
 
 /*
  * Internal mouse shortcuts.
