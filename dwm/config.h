@@ -43,7 +43,7 @@ static const Rule rules[] = {
 	{  "spotify",		NULL,			NULL,			3,			0,			0,			-1,			 0	},
     {  "xdman-Main",    NULL,           NULL,           0,          0,          1,          -1,          0  },
 	{  NULL,			NULL,			"scratchpad",	0,          1,          1,          -1,			's' },
-	{  NULL,			NULL,			"gotopcmd",		0,			1,			1,			-1,			'g' },
+	{  NULL,			NULL,			"htopcmd",		0,			1,			1,			-1,			'g' },
 	{  NULL,			NULL,	        "bccmd",        0,          1,          1,          -1,         'c' },
 	{  "pulsemixercmd",	NULL,			NULL,           0,          1,          1,          -1,         'p' },
 };
@@ -76,10 +76,10 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
-static const char *gotopcmd[]		= {"g", "st", "-t", "gotopcmd", "-e", "gotop", NULL}; 
+static const char *htopcmd[]		= {"g", "st", "-t", "htopcmd", "-e", "htop", NULL}; 
 static const char *bccmd[]			= {"c", "st", "-t", "bccmd", "-g", "40x20", "-e", "bc", "-lq", NULL};
 static const char *pulsemixercmd[]	= {"p", "st", "-c", "pulsemixercmd", "-e", "pulsemixer", NULL}; 
 
@@ -90,7 +90,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_a,      togglescratch,  {.v = pulsemixercmd } },
-	{ MODKEY,                       XK_s,      togglescratch,  {.v = gotopcmd } },
+	{ MODKEY,                       XK_s,      togglescratch,  {.v = htopcmd } },
 	{ MODKEY,                       XK_c,      togglescratch,  {.v = bccmd } },
 
 //	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun") },	
