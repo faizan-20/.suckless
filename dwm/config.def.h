@@ -14,7 +14,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=12" };
+static const char *fonts[]          = { "Hack Nerd Font:size=12" };
 static const char dmenufont[]       = "SF Pro Display:size=12";
 static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#444444";
@@ -28,7 +28,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1-", "2-", "3-", "4-", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1-", "2-", "3-", "4-", "5-", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -44,7 +44,8 @@ static const Rule rules[] = {
 	{  "qBittorrent",	NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "GParted",		NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "Timeshift-gtk",	NULL,			NULL,			0,			0,			1,			-1,			 0  },
-	{  "spotify",		NULL,			NULL,			3,			0,			0,			-1,			 0	},
+	{  "spotify",		NULL,			NULL,			5,			0,			0,			-1,			 0	},
+    {  "mailspring",    NULL,           NULL,           4,          0,          0,          -1,          0  },
     {  "xdman-Main",    NULL,           NULL,           0,          0,          1,          -1,          0  },
 	{  NULL,			NULL,			"scratchpad",	0,          1,          1,          -1,			's' },
 	{  NULL,			NULL,			"htopcmd",		0,			1,			1,			-1,			'g' },
@@ -146,7 +147,7 @@ static Key keys[] = {
 	{ 0,							XK_Print,  spawn,		   SHCMD("xfce4-screenshooter") },
 	{ MODKEY,						XK_w,	   spawn,		   SHCMD("firefox") },
 	{ MODKEY,						XK_e,	   spawn,		   SHCMD("thunar") },
-	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("betterlockscreen -l dim") },
+	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("i3lock-fancy") },
 	{ MODKEY|ShiftMask,				XK_s,	   spawn,		   SHCMD("LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify") },
 	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },
 	{ MODKEY,						XK_p,	   spawn,		   SHCMD("picom --experimental-backends") },
