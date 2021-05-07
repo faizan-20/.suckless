@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-
+//#include "/home/<USER>/.cache/wal/colors-wal-st.h"
 /*
  * appearance
  *

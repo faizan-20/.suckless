@@ -24,7 +24,7 @@ static const char col_gray4[]       = "#ebdbb2";
 static const char col_cyan[]        = "#458588";
 static const char col_urgborder[]   = "#ff0000";
 //static const char *colors[][3]      = {
-  /*               fg         bg         border   */
+///*               fg         bg         border   */
 //	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 //	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 //	[SchemeUrg]  = { col_gray4, col_cyan,  col_urgborder  },
@@ -48,12 +48,12 @@ static const Rule rules[] = {
 	{  "GParted",		NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "Timeshift-gtk",	NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "spotify",		NULL,			NULL,			5,			0,			0,			-1,			 0	},
-    {  "thunderbird",    NULL,           NULL,           4,          0,          0,          -1,          0  },
+    {  "thunderbird",   NULL,           NULL,           4,          0,          0,          -1,          0  },
     {  "xdman-Main",    NULL,           NULL,           0,          0,          1,          -1,          0  },
 	{  NULL,			NULL,			"scratchpad",	0,          1,          1,          -1,			's' },
 	{  NULL,			NULL,			"htopcmd",		0,			1,			1,			-1,			'g' },
 	{  NULL,			NULL,	        "bccmd",        0,          1,          1,          -1,         'c' },
-	{  "pulsemixercmd",	NULL,			NULL,           0,          1,          1,          -1,         'p' },
+	{  NULL,	        NULL,			"pulsemixercmd",0,          1,          1,          -1,         'p' },
 };
 
 /* layout(s) */
@@ -99,10 +99,10 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmen.sh", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
-static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
-static const char *htopcmd[]		= {"g", "st", "-t", "htopcmd", "-e", "htop", NULL}; 
+static const char *scratchpadcmd[]  = {"s", "alacritty", "-t", "scratchpad", NULL};
+static const char *htopcmd[]		= {"g", "st", "-t", "htopcmd", "-e", "gotop", NULL}; 
 static const char *bccmd[]			= {"c", "st", "-t", "bccmd", "-g", "40x20", "-e", "bc", "-lq", NULL};
-static const char *pulsemixercmd[]	= {"p", "st", "-c", "pulsemixercmd", "-e", "pulsemixer", NULL}; 
+static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "pulsemixer", NULL}; 
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
@@ -145,7 +145,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
-//	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
 	
 	/*Applications*/
 	{ 0,							XK_Print,  spawn,		   SHCMD("xfce4-screenshooter") },
@@ -167,14 +166,14 @@ static Key keys[] = {
   { 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 5; dunstify -r 2 -t 750 \" :$(xbacklight -get | awk '{print int($1)}')\"") },
 
   /*Gaps*/
-	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+	{ MODKEY,                       XK_m,      incrgaps,       {.i = +1 } },
+	{ MODKEY,                       XK_n,      incrgaps,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_m,      incrogaps,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_n,      incrogaps,      {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_m,      incrigaps,      {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_n,      incrigaps,      {.i = -1 } },
+	{ MODKEY,                       XK_0,      togglegaps,     {0} },
+	{ MODKEY|ShiftMask,             XK_r,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
 	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
