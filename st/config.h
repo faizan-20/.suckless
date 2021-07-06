@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-
+//#include "/home/<USER>/.cache/wal/colors-wal-st.h"
 /*
  * appearance
  *
@@ -7,7 +7,7 @@
  */
 static char *font = "Hack Nerd Font:pixelsize=20:antialias=true:autohint=true";
 static char *font2 = "Symbola:pixelsize=20:antialias=true:autohint=true";
-static int borderpx = 6;
+static int borderpx = 10;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -110,42 +110,43 @@ unsigned int tabspaces = 4;
 float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
-   /* 8 normal colors */
-   "#282828", /*default: #282828 hard contrast: #1d2021 / soft contrast: #32302f */
-   "#cc241d", /* red     */
-   "#98971a", /* green   */
-   "#d79921", /* yellow  */
-   "#458588", /* blue    */
-   "#b16286", /* magenta */
-   "#689d6a", /* cyan    */
-   "#a89984", /* white   */
-
-   /* 8 bright colors */
-   "#928374", /* black   */
-   "#fb4934", /* red     */
-   "#b8bb26", /* green   */
-   "#fabd2f", /* yellow  */
-   "#83a598", /* blue    */
-   "#d3869b", /* magenta */
-   "#8ec07c", /* cyan    */
-   "#ebdbb2", /* white   */
-   [255] = 0,
-
-   "#add8e6",
-   "#555555",
-   "#282828",
-   "#ebdbb2",
-};
+#include "/home/faizan/.cache/wal/colors-wal-st.h"
+//static const char *colorname[] = {
+//   /* 8 normal colors */
+//   "#1d2021", /*default: #282828 hard contrast: #1d2021 / soft contrast: #32302f */
+//   "#cc241d", /* red     */
+//   "#98971a", /* green   */
+//   "#d79921", /* yellow  */
+//   "#458588", /* blue    */
+//   "#b16286", /* magenta */
+//   "#689d6a", /* cyan    */
+//   "#a89984", /* white   */
+//
+//   /* 8 bright colors */
+//   "#928374", /* black   */
+//   "#fb4934", /* red     */
+//   "#b8bb26", /* green   */
+//   "#fabd2f", /* yellow  */
+//   "#83a598", /* blue    */
+//   "#d3869b", /* magenta */
+//   "#8ec07c", /* cyan    */
+//   "#ebdbb2", /* white   */
+//   [255] = 0,
+//
+//   "#add8e6",
+//   "#555555",
+//   "#1d2021",
+//   "#ebdbb2",
+//};
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 15;
-unsigned int defaultbg = 258;
-unsigned int defaultcs = 15;
-unsigned int defaultrcs = 257; 
+//unsigned int defaultfg = 15;
+//unsigned int defaultbg = 258;
+//unsigned int defaultcs = 15;
+//unsigned int defaultrcs = 257; 
 /*
  * Default shape of cursor
  * 2: Block ("█")
