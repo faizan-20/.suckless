@@ -1,13 +1,13 @@
 /* See LICENSE file for copyright and license details. */
-
+//#include "/home/<USER>/.cache/wal/colors-wal-st.h"
 /*
  * appearance
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Hack Nerd Font:pixelsize=20:antialias=true:autohint=true";
-static char *font2 = "Symbola:pixelsize=20:antialias=true:autohint=true";
-static int borderpx = 6;
+static char *font = "Hack Nerd Font:pixelsize=18:antialias=true:autohint=false";
+static char *font2 = "Symbola:pixelsize=18:antialias=true:autohint=false";
+static int borderpx = 4;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -110,40 +110,58 @@ unsigned int tabspaces = 4;
 float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
+//#include "/home/faizan/.cache/wal/colors-wal-st.h"
 static const char *colorname[] = {
    /* 8 normal colors */
-   "#282828", /*default: #282828 hard contrast: #1d2021 / soft contrast: #32302f */
-   "#cc241d", /* red     */
-   "#98971a", /* green   */
-   "#d79921", /* yellow  */
-   "#458588", /* blue    */
-   "#b16286", /* magenta */
-   "#689d6a", /* cyan    */
-   "#a89984", /* white   */
+//   "#1d2021", /*default: #282828 hard contrast: #1d2021 / soft contrast: #32302f */
+//   "#cc241d", /* red     */
+//   "#98971a", /* green   */
+//   "#d79921", /* yellow  */
+//   "#458588", /* blue    */
+//   "#b16286", /* magenta */
+//   "#689d6a", /* cyan    */
+//   "#a89984", /* white   */
+//
+//   /* 8 bright colors */
+//   "#928374", /* black   */
+//   "#fb4934", /* red     */
+//   "#b8bb26", /* green   */
+//   "#fabd2f", /* yellow  */
+//   "#83a598", /* blue    */
+//   "#d3869b", /* magenta */
+//   "#8ec07c", /* cyan    */
+//   "#ebdbb2", /* white   */
 
-   /* 8 bright colors */
-   "#928374", /* black   */
-   "#fb4934", /* red     */
-   "#b8bb26", /* green   */
-   "#fabd2f", /* yellow  */
-   "#83a598", /* blue    */
-   "#d3869b", /* magenta */
-   "#8ec07c", /* cyan    */
-   "#ebdbb2", /* white   */
-   [255] = 0,
+    "#181819",
+    "#fc5d7c",
+    "#9ed072",
+    "#e7c664",
+    "#76cce0",
+    "#b39df3",
+    "#f39660",
+    "#e2e2e3",
 
-   "#add8e6",
+    "#181819",
+    "#fc5d7c",
+    "#9ed072",
+    "#e7c664",
+    "#76cce0",
+    "#b39df3",
+    "#f39660",
+    "#e2e2e3",
+   
+    [255] = 0,
+
+   "#cccccc",
    "#555555",
-   "#282828",
-   "#ebdbb2",
 };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 15;
-unsigned int defaultbg = 258;
+unsigned int defaultfg = 7;
+unsigned int defaultbg = 0;
 unsigned int defaultcs = 15;
 unsigned int defaultrcs = 257; 
 /*
@@ -181,6 +199,42 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+		{ "font",         STRING,  &font },
+		{ "color0",       STRING,  &colorname[0] },
+		{ "color1",       STRING,  &colorname[1] },
+		{ "color2",       STRING,  &colorname[2] },
+		{ "color3",       STRING,  &colorname[3] },
+		{ "color4",       STRING,  &colorname[4] },
+		{ "color5",       STRING,  &colorname[5] },
+		{ "color6",       STRING,  &colorname[6] },
+		{ "color7",       STRING,  &colorname[7] },
+		{ "color8",       STRING,  &colorname[8] },
+		{ "color9",       STRING,  &colorname[9] },
+		{ "color10",      STRING,  &colorname[10] },
+		{ "color11",      STRING,  &colorname[11] },
+		{ "color12",      STRING,  &colorname[12] },
+		{ "color13",      STRING,  &colorname[13] },
+		{ "color14",      STRING,  &colorname[14] },
+		{ "color15",      STRING,  &colorname[15] },
+		{ "background",   STRING,  &colorname[256] },
+		{ "foreground",   STRING,  &colorname[257] },
+		{ "cursorColor",  STRING,  &colorname[258] },
+		{ "termname",     STRING,  &termname },
+		{ "shell",        STRING,  &shell },
+		{ "minlatency",   INTEGER, &minlatency },
+		{ "maxlatency",   INTEGER, &maxlatency },
+		{ "blinktimeout", INTEGER, &blinktimeout },
+		{ "bellvolume",   INTEGER, &bellvolume },
+		{ "tabspaces",    INTEGER, &tabspaces },
+		{ "borderpx",     INTEGER, &borderpx },
+		{ "cwscale",      FLOAT,   &cwscale },
+		{ "chscale",      FLOAT,   &chscale },
+};
 
 /*
  * Internal mouse shortcuts.
