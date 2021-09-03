@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
- 
+
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -101,9 +101,9 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 
 static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
-static const char *htopcmd[]		= {"g", "st", "-t", "htopcmd", "-e", "gotop", NULL}; 
+static const char *htopcmd[]		= {"g", "st", "-t", "htopcmd", "-e", "gotop", NULL};
 static const char *bccmd[]			= {"c", "st", "-t", "bccmd", "-g", "40x20", "-e", "bc", "-lq", NULL};
-static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "pulsemixer", NULL}; 
+static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "pulsemixer", NULL};
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
@@ -115,7 +115,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,      togglescratch,  {.v = htopcmd } },
 	{ MODKEY,                       XK_c,      togglescratch,  {.v = bccmd } },
 
-//	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun") },	
+//	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun") },
 	{ MODKEY,			            XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -146,10 +146,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
-	
+
 	/*Applications*/
 	{ 0,							XK_Print,  spawn,		   SHCMD("xfce4-screenshooter") },
-	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("chromium") },
+	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("brave") },
     { MODKEY,	        			XK_w,	   spawn,		   SHCMD("firefox") },
 	{ MODKEY,						XK_e,	   spawn,		   SHCMD("thunar") },
 	{ MODKEY,						XK_r,	   spawn,		   SHCMD("st -e ranger") },

@@ -114,28 +114,46 @@ float alpha = 0.8;
 static const char *colorname[] = {
 
 
-    /* normal colors */
-    "#181819", /* red     */
-    "#fc5d7c", /* green   */
-    "#9ed072", /* yellow  */
-    "#e7c664", /* blue    */
-    "#76cce0", /* magenta */
-    "#b39df3", /* cyan    */
-    "#f39660", /* white   */
-    "#e2e2e3",              
+   // /* normal colors */
+   // "#181819", /* red     */
+   // "#fc5d7c", /* green   */
+   // "#9ed072", /* yellow  */
+   // "#e7c664", /* blue    */
+   // "#76cce0", /* magenta */
+   // "#b39df3", /* cyan    */
+   // "#f39660", /* white   */
+   // "#e2e2e3",
 
-    /* bright colors */
+   // /* bright colors */
+   // "#928374", /* black   */
+   // "#fc5d7c", /* red     */
+   // "#9ed072", /* green   */
+   // "#e7c664", /* yellow  */
+   // "#76cce0", /* blue    */
+   // "#b39df3", /* magenta */
+   // "#f39660", /* cyan    */
+   // "#e2e2e3", /* white   */
+
+   // "#2c2e34", /* BG */
+   // "#e2e2e3", /* FG */
+
+    "#1d2021", /* hard contrast: #1d2021 / sof contrast: #32302f */
+    "#cc241d", /* red     */
+    "#98971a", /* green   */
+    "#d79921", /* yellow  */
+    "#458588", /* blue    */
+    "#b16286", /* magenta */
+    "#689d6a", /* cyan    */
+    "#a89984", /* white   */
+
     "#928374", /* black   */
-    "#fc5d7c", /* red     */
-    "#9ed072", /* green   */
-    "#e7c664", /* yellow  */
-    "#76cce0", /* blue    */
-    "#b39df3", /* magenta */
-    "#f39660", /* cyan    */
-    "#e2e2e3", /* white   */
-    
-    "#2c2e34", /* BG */
-    "#e2e2e3", /* FG */
+    "#fb4934", /* red     */
+    "#b8bb26", /* green   */
+    "#fabd2f", /* yellow  */
+    "#83a598", /* blue    */
+    "#d3869b", /* magenta */
+    "#8ec07c", /* cyan    */
+    "#ebdbb2", /* white   */
 };
 
 /*
@@ -145,7 +163,7 @@ static const char *colorname[] = {
 unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
 unsigned int defaultcs = 15;
-unsigned int defaultrcs = 257; 
+unsigned int defaultrcs = 257;
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -181,42 +199,6 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
-
-/*
- * Xresources preferences to load at startup
- */
-ResourcePref resources[] = {
-		{ "font",         STRING,  &font },
-		{ "color0",       STRING,  &colorname[0] },
-		{ "color1",       STRING,  &colorname[1] },
-		{ "color2",       STRING,  &colorname[2] },
-		{ "color3",       STRING,  &colorname[3] },
-		{ "color4",       STRING,  &colorname[4] },
-		{ "color5",       STRING,  &colorname[5] },
-		{ "color6",       STRING,  &colorname[6] },
-		{ "color7",       STRING,  &colorname[7] },
-		{ "color8",       STRING,  &colorname[8] },
-		{ "color9",       STRING,  &colorname[9] },
-		{ "color10",      STRING,  &colorname[10] },
-		{ "color11",      STRING,  &colorname[11] },
-		{ "color12",      STRING,  &colorname[12] },
-		{ "color13",      STRING,  &colorname[13] },
-		{ "color14",      STRING,  &colorname[14] },
-		{ "color15",      STRING,  &colorname[15] },
-		{ "background",   STRING,  &colorname[256] },
-		{ "foreground",   STRING,  &colorname[257] },
-		{ "cursorColor",  STRING,  &colorname[258] },
-		{ "termname",     STRING,  &termname },
-		{ "shell",        STRING,  &shell },
-		{ "minlatency",   INTEGER, &minlatency },
-		{ "maxlatency",   INTEGER, &maxlatency },
-		{ "blinktimeout", INTEGER, &blinktimeout },
-		{ "bellvolume",   INTEGER, &bellvolume },
-		{ "tabspaces",    INTEGER, &tabspaces },
-		{ "borderpx",     INTEGER, &borderpx },
-		{ "cwscale",      FLOAT,   &cwscale },
-		{ "chscale",      FLOAT,   &chscale },
-};
 
 /*
  * Internal mouse shortcuts.
