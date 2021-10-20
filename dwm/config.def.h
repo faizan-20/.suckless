@@ -109,7 +109,8 @@ static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "p
 static Key keys[] = {
 	/*Standard*/
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	//{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun") },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_a,      togglescratch,  {.v = pulsemixercmd } },
 	{ MODKEY,                       XK_s,      togglescratch,  {.v = htopcmd } },
@@ -148,10 +149,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 
 	/*Applications*/
-	{ 0,							XK_Print,  spawn,		   SHCMD("xfce4-screenshooter") },
+	{ 0,							XK_Print,  spawn,		   SHCMD("flameshot gui") },
 	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("brave") },
     { MODKEY,	        			XK_w,	   spawn,		   SHCMD("firefox") },
-	{ MODKEY,						XK_e,	   spawn,		   SHCMD("thunar") },
+	{ MODKEY,						XK_e,	   spawn,		   SHCMD("dolphin") },
 	{ MODKEY,						XK_r,	   spawn,		   SHCMD("st -e ranger") },
     { MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("blueman-manager") },
 	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("i3lock-fancy") },
@@ -159,6 +160,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },
 	{ MODKEY,						XK_p,	   spawn,		   SHCMD("picom --experimental-backends") },
     { MODKEY,                       XK_x,      spawn,          SHCMD("./.local/bin/scripts/word-lookup.sh")},
+    { MODKEY,                       XK_f,      spawn,          SHCMD("feh --bg-fill --randomize ~/Wallpapers/Walls")},
 
 
 	/*Keyboard keys*/
