@@ -152,14 +152,13 @@ static Key keys[] = {
 	{ 0,							XK_Print,  spawn,		   SHCMD("flameshot gui") },
 	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("brave") },
     { MODKEY,	        			XK_w,	   spawn,		   SHCMD("firefox") },
-	{ MODKEY,						XK_e,	   spawn,		   SHCMD("dolphin") },
+	{ MODKEY,						XK_e,	   spawn,		   SHCMD("thunar") },
 	{ MODKEY,						XK_r,	   spawn,		   SHCMD("st -e ranger") },
     { MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("blueman-manager") },
 	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("i3lock-fancy") },
 	{ MODKEY|ShiftMask,				XK_s,	   spawn,		   SHCMD("env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify %U") },
 	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },
 	{ MODKEY,						XK_p,	   spawn,		   SHCMD("picom --experimental-backends") },
-    { MODKEY,                       XK_x,      spawn,          SHCMD("./.local/bin/scripts/word-lookup.sh")},
     { MODKEY,                       XK_f,      spawn,          SHCMD("feh --bg-fill --randomize ~/Wallpapers/Walls")},
 
 

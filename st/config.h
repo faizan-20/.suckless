@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Hack Nerd Font:pixelsize=16:antialias=true:autohint=false";
-static char *font2 = "Symbola:pixelsize=16:antialias=true:autohint=false";
+static char *font2 = "Symbola:pixelsize=14:antialias=true:autohint=false";
 static int borderpx = 10;
 
 /*
@@ -113,8 +113,9 @@ float alpha = 0.8;
 //#include "/home/faizan/.cache/wal/colors-wal-st.h"
 static const char *colorname[] = {
 
+    /*Sonokai*/
 
-   // /* normal colors */
+    /* normal colors */
    // "#181819", /* red     */
    // "#fc5d7c", /* green   */
    // "#9ed072", /* yellow  */
@@ -137,6 +138,8 @@ static const char *colorname[] = {
    // "#2c2e34", /* BG */
    // "#e2e2e3", /* FG */
 
+    /*Gruvbox*/
+
     "#1d2021", /* hard contrast: #1d2021 / sof contrast: #32302f */
     "#cc241d", /* red     */
     "#98971a", /* green   */
@@ -154,6 +157,7 @@ static const char *colorname[] = {
     "#d3869b", /* magenta */
     "#8ec07c", /* cyan    */
     "#ebdbb2", /* white   */
+
 };
 
 /*
@@ -199,6 +203,42 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+		{ "font",         STRING,  &font },
+		{ "color0",       STRING,  &colorname[0] },
+		{ "color1",       STRING,  &colorname[1] },
+		{ "color2",       STRING,  &colorname[2] },
+		{ "color3",       STRING,  &colorname[3] },
+		{ "color4",       STRING,  &colorname[4] },
+		{ "color5",       STRING,  &colorname[5] },
+		{ "color6",       STRING,  &colorname[6] },
+		{ "color7",       STRING,  &colorname[7] },
+		{ "color8",       STRING,  &colorname[8] },
+		{ "color9",       STRING,  &colorname[9] },
+		{ "color10",      STRING,  &colorname[10] },
+		{ "color11",      STRING,  &colorname[11] },
+		{ "color12",      STRING,  &colorname[12] },
+		{ "color13",      STRING,  &colorname[13] },
+		{ "color14",      STRING,  &colorname[14] },
+		{ "color15",      STRING,  &colorname[15] },
+		{ "background",   STRING,  &colorname[256] },
+		{ "foreground",   STRING,  &colorname[257] },
+		{ "cursorColor",  STRING,  &colorname[258] },
+		{ "termname",     STRING,  &termname },
+		{ "shell",        STRING,  &shell },
+		{ "minlatency",   INTEGER, &minlatency },
+		{ "maxlatency",   INTEGER, &maxlatency },
+		{ "blinktimeout", INTEGER, &blinktimeout },
+		{ "bellvolume",   INTEGER, &bellvolume },
+		{ "tabspaces",    INTEGER, &tabspaces },
+		{ "borderpx",     INTEGER, &borderpx },
+		{ "cwscale",      FLOAT,   &cwscale },
+		{ "chscale",      FLOAT,   &chscale },
+};
 
 /*
  * Internal mouse shortcuts.
