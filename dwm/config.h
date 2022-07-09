@@ -109,8 +109,8 @@ static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "p
 static Key keys[] = {
 	/*Standard*/
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	//{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun") },
+	//{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun -show-icons") },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_a,      togglescratch,  {.v = pulsemixercmd } },
 	{ MODKEY,                       XK_s,      togglescratch,  {.v = htopcmd } },
@@ -159,15 +159,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				XK_s,	   spawn,		   SHCMD("env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify %U") },
 	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },
 	{ MODKEY,						XK_p,	   spawn,		   SHCMD("picom --experimental-backends") },
-    { MODKEY,                       XK_f,      spawn,          SHCMD("feh --bg-fill --randomize ~/Wallpapers/Walls")},
+    { MODKEY,                       XK_f,      spawn,          SHCMD("feh --bg-fill --randomize ~/Pictures/Wallpapers/Walls")},
+    { MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("rofi -show power-menu -modi power-menu:rofi-power-menu") },
 
 
 	/*Keyboard keys*/
   { 0, XF86XK_AudioMute,			spawn,		SHCMD("pamixer -t; dunstify -r 2 -t 750 \"VOL:$(pamixer --get-volume-human)\"") },
   { 0, XF86XK_AudioRaiseVolume,	    spawn,		SHCMD("pamixer --allow-boost -i 5; dunstify -r 2 -t 750 \" :$(pamixer --get-volume-human)\"") },
   { 0, XF86XK_AudioLowerVolume,	    spawn,		SHCMD("pamixer --allow-boost -d 5; dunstify -r 2 -t 750 \" :$(pamixer --get-volume-human)\"") },
-  { 0, XF86XK_MonBrightnessUp,	    spawn,		SHCMD("xbacklight -inc 5; dunstify -r 2 -t 750 \" :$(xbacklight -get | awk '{print int($1)}')\"") },
-  { 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 5; dunstify -r 2 -t 750 \" :$(xbacklight -get | awk '{print int($1)}')\"") },
+  { 0, XF86XK_MonBrightnessUp,	    spawn,		SHCMD("light -A 5; dunstify -r 2 -t 750 \" :$(light -G)\"") },
+  { 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("light -U 5; dunstify -r 2 -t 750 \" :$(light -G)\"") },
 
   /*Gaps*/
 	{ MODKEY,                       XK_m,      incrgaps,       {.i = +1 } },
