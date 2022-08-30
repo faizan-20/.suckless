@@ -4,7 +4,7 @@ static const Block blocks[] = {
     {" : ",    "uname -r",           360,                2},
     {" : ",    "pacupdate",        360,                9},
 	{" : ",	"memory",	        10,	                1},
-//	{"",	    "battery",	        5,	                3},
+	{"",	    "battery",	        5,	                3},
 	{" : ",	"clock",	        5,	                0},
 };
 
