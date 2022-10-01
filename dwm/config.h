@@ -48,7 +48,6 @@ static const Rule rules[] = {
 
 	/* class			    instance		title			tagsmask	iscentered	isfloating	monitor		scratchkey*/
 	{  "Gimp",		    	NULL,			NULL,			0,			0,			1,			-1,			 0  },
-	{  "dolphin",		    NULL,			NULL,			0,			0,			1,			-1,			 0  },
 	{  "firefox",		    NULL,			NULL,			2,	        0,			0,			-1,			 0  },
 	{  "Brave-browser",     NULL,			NULL,			2,		    0,          0,			-1,		     0 	},
 	{  "Chromium",          NULL,			NULL,			2,		    0,          0,			-1,		     0 	},
