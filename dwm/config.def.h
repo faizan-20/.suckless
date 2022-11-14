@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 8;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 12;       /* vert inner gap between windows */
@@ -17,23 +17,23 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "NotoSansMono Nerd Font:size=10" };
 static const char dmenufont[]       = "NotoSansMono Nerd Font:size=10";
 //#include "/home/faizan/.cache/wal/colors-wal-dwm.h"
-//static const char col_gray1[]       = "#000000";
-//static const char col_gray2[]       = "#ebdbb2";
-//static const char col_gray3[]       = "#a89984";
-//static const char col_gray4[]       = "#ebdbb2";
-//static const char col_cyan[]        = "#000";
-static const char col_urgborder[]   = "#cc241d";
+static const char col_gray1[]       = "#1d2021";
+static const char col_gray2[]       = "#a89984";
+static const char col_gray3[]       = "#ebdbb2";
+static const char col_gray4[]       = "#928374";
+static const char col_cyan[]        = "#83a598";
+static const char col_urgborder[]   = "#fb4934";
 //
-static const char col_gray1[]            = "#1f2227";
-static const char col_gray2[]            = "#abb2bf";
-static const char col_gray3[]            = "#abb2bf";
-static const char col_gray4[]       = "#ebdbb2";
-static const char col_gray5[]       = "#000000";
-static const char col_cyan[]             = "#1f2227";
+//static const char col_gray1[]            = "#1f2227";
+//static const char col_gray2[]            = "#abb2bf";
+//static const char col_gray3[]            = "#abb2bf";
+//static const char col_gray4[]            = "#ebdbb2";
+//static const char col_gray5[]            = "#000000";
+//static const char col_cyan[]             = "#1f2227";
 static const char *colors[][3]      = {
 /*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray5 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
+	[SchemeSel]  = { col_gray3, col_cyan,  col_cyan  },
 	[SchemeUrg]  = { col_gray4, col_cyan,  col_urgborder  },
 };
 
@@ -103,9 +103,9 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-//static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 
-//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };  // see line 1989 in dwm.c
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };  // see line 1989 in dwm.c
 static const char *termcmd[]  = { "st", NULL };
 
 static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
@@ -117,8 +117,8 @@ static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "p
 static Key keys[] = {
 	/*Standard*/
 	/* modifier                     key        function        argument */
-	//{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun -show-icons") },
+	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	//{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun -show-icons") },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_a,      togglescratch,  {.v = pulsemixercmd } },
 	{ MODKEY,                       XK_s,      togglescratch,  {.v = htopcmd } },
@@ -160,7 +160,7 @@ static Key keys[] = {
 	{ 0,							XK_Print,  spawn,		   SHCMD("scrot -s --line mode=edge ~/Pictures/Screenshots/%Y-%m-%d_%H%M%S-$w$h_scrot.png") },
 	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("brave") },
     { MODKEY,	        			XK_w,	   spawn,		   SHCMD("firefox") },
-	{ MODKEY,						XK_e,	   spawn,		   SHCMD("dolphin") },
+	{ MODKEY,						XK_e,	   spawn,		   SHCMD("pcmanfm") },
 	{ MODKEY,						XK_r,	   spawn,		   SHCMD("st -e ranger") },
     { MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("blueman-manager") },
 	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("i3lock-fancy") },
