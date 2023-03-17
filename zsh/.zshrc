@@ -1,3 +1,7 @@
+PATH=$HOME/.local/.bin/executables:$PATH
+
+export VISUAL="nvim";
+export EDITOR="nvim";
 
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
@@ -20,8 +24,8 @@ eval "$(starship init zsh)"
 alias pac='sudo pacman'
 alias v='nvim'
 alias sudo='sudo '
-alias ls='exa -l'
-alias orphan='pacman -Qtdq | pacman -Rns -'
+alias ls='exa -l --icons --group-directories-first'
+alias orphan='sudo pacman -Qtdq |sudo pacman -Rns -'
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh

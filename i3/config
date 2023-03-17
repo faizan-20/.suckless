@@ -188,10 +188,10 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 bindsym Print exec xfce4-screenshooter
 bindsym $mod+Shift+w exec feh --bg-fill --randomize ~/Wallpapers/Walls
 bindsym $mod+shift+p exec killall picom
-bindsym $mod+p exec picom --experimental-backends
+bindsym $mod+p exec picom
 
 # Autostart
-exec_always --no-startup-id picom --experimental-backends
+exec_always --no-startup-id picom
 exec_always --no-startup-id feh --bg-fill --randomize ~/Pictures/Wallpapers/Walls
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id blueman-applet
