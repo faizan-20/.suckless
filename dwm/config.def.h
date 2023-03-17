@@ -16,13 +16,14 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "NotoSansMono Nerd Font:size=10" };
 static const char dmenufont[]       = "NotoSansMono Nerd Font:size=10";
-#include "/home/faizan/.cache/wal/colors-wal-dwm.h"
-//static const char col_gray1[]       = "#1d2021";
-//static const char col_gray2[]       = "#a89984";
-//static const char col_gray3[]       = "#ebdbb2";
-//static const char col_gray4[]       = "#928374";
-//static const char col_cyan[]        = "#83a598";
-//static const char col_urgborder[]   = "#fb4934";
+//#include "/home/faizan/.cache/wal/colors-wal-dwm.h"
+static const char col_gray1[]       = "#1a1b26";
+static const char col_gray2[]       = "#c0caf5";
+static const char col_gray3[]       = "#15161e";
+static const char col_gray4[]       = "#c0caf5";
+static const char col_cyan[]        = "#7dcfff";
+static const char col_border[]	    = "#c0caf5";
+static const char col_urgborder[]   = "#f7768e";
 //
 //static const char col_gray1[]            = "#1f2227";
 //static const char col_gray2[]            = "#abb2bf";
@@ -30,12 +31,12 @@ static const char dmenufont[]       = "NotoSansMono Nerd Font:size=10";
 //static const char col_gray4[]            = "#ebdbb2";
 //static const char col_gray5[]            = "#000000";
 //static const char col_cyan[]             = "#1f2227";
-//static const char *colors[][3]      = {
-///*               fg         bg         border   */
-//	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
-//	[SchemeSel]  = { col_gray3, col_cyan,  col_cyan  },
-//	[SchemeUrg]  = { col_gray4, col_cyan,  col_urgborder  },
-//};
+static const char *colors[][3]      = {
+/*               fg         bg         border   */
+	[SchemeNorm] = { col_gray2, col_gray1, col_gray1 },
+	[SchemeSel]  = { col_gray3, col_cyan,  col_border  },
+	[SchemeUrg]  = { col_gray4, col_cyan,  col_urgborder  },
+};
 
 /* tagging */
 static const char *tags[] = { "1-", "2-", "3-", "4-", "5-", "6", "7", "8", "9" };
@@ -109,7 +110,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *termcmd[]  = { "st", NULL };
 
 static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
-static const char *htopcmd[]		= {"g", "st", "-t", "htopcmd", "-e", "htop", NULL};
+static const char *htopcmd[]		= {"g", "st", "-t", "htopcmd", "-e", "gotop", NULL};
 static const char *bccmd[]			= {"c", "st", "-t", "bccmd", "-g", "40x20", "-e", "bc", "-lq", NULL};
 static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "pulsemixer", NULL};
 
@@ -157,18 +158,18 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 
 	/*Applications*/
-	{ ControlMask,					XK_Print,  spawn,		   SHCMD("flameshot gui") },
-	{ MODKEY|ShiftMask,				XK_w,	   spawn,		   SHCMD("brave") },
-    { MODKEY,	        			XK_w,	   spawn,		   SHCMD("firefox") },
-	{ MODKEY,						XK_e,	   spawn,		   SHCMD("pcmanfm") },
-	{ MODKEY,						XK_r,	   spawn,		   SHCMD("st -e ranger") },
-    { MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("blueman-manager") },
-	{ MODKEY|ShiftMask,				XK_x,	   spawn,		   SHCMD("i3lock-fancy") },
-	{ MODKEY|ShiftMask,				XK_s,	   spawn,		   SHCMD("env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify %U") },
-	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   SHCMD("killall picom") },
-	{ MODKEY,						XK_p,	   spawn,		   SHCMD("picom --experimental-backends") },
-    { MODKEY,                       XK_f,      spawn,          SHCMD("feh --bg-fill --randomize ~/Pictures/Wallpapers/Walls")},
-    { MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("rofi -show power-menu -modi power-menu:rofi-power-menu") },
+	{ ControlMask,			XK_Print,  spawn,		SHCMD("flameshot gui") },
+	{ MODKEY|ShiftMask,		XK_w,	   spawn,		SHCMD("brave") },
+        { MODKEY,	        	XK_w,	   spawn,		SHCMD("firefox") },
+	{ MODKEY,			XK_e,	   spawn,		SHCMD("thunar") },
+	{ MODKEY,			XK_r,	   spawn,		SHCMD("st -e ranger") },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,		SHCMD("blueman-manager") },
+	{ MODKEY|ShiftMask,		XK_x,	   spawn,		SHCMD("i3lock-fancy") },
+	{ MODKEY|ShiftMask,		XK_s,	   spawn,		SHCMD("env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify %U") },
+	{ MODKEY|ShiftMask,		XK_p,	   spawn,		SHCMD("killall picom") },
+	{ MODKEY,			XK_p,	   spawn,		SHCMD("picom --experimental-backends") },
+	{ MODKEY,                       XK_f,      spawn,		SHCMD("feh --bg-fill --randomize ~/Pictures/Wallpapers/Walls")},
+	{ MODKEY|ControlMask,           XK_s,      spawn,		SHCMD("rofi -show power-menu -modi power-menu:rofi-power-menu") },
 
 
 	/*Keyboard keys*/
