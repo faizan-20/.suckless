@@ -111,63 +111,41 @@ float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 //#include "/home/faizan/.cache/wal/colors-wal-st.h"
-//static const char *colorname[] = {
-//
-//    /*Sonokai*/
-//
-//    /* normal colors */
-//   // "#181819", /* red     */
-//   // "#fc5d7c", /* green   */
-//   // "#9ed072", /* yellow  */
-//   // "#e7c664", /* blue    */
-//   // "#76cce0", /* magenta */
-//   // "#b39df3", /* cyan    */
-//   // "#f39660", /* white   */
-//   // "#e2e2e3",
-//
-//   // /* bright colors */
-//   // "#928374", /* black   */
-//   // "#fc5d7c", /* red     */
-//   // "#9ed072", /* green   */
-//   // "#e7c664", /* yellow  */
-//   // "#76cce0", /* blue    */
-//   // "#b39df3", /* magenta */
-//   // "#f39660", /* cyan    */
-//   // "#e2e2e3", /* white   */
-//
-//   // "#2c2e34", /* BG */
-//   // "#e2e2e3", /* FG */
-//
-//    /*Gruvbox*/
-//
-//    "#1d2021", /* hard contrast: #1d2021 / sof contrast: #32302f */
-//    "#cc241d", /* red     */
-//    "#98971a", /* green   */
-//    "#d79921", /* yellow  */
-//    "#458588", /* blue    */
-//    "#b16286", /* magenta */
-//    "#689d6a", /* cyan    */
-//    "#a89984", /* white   */
-//
-//    "#928374", /* black   */
-//    "#fb4934", /* red     */
-//    "#b8bb26", /* green   */
-//    "#fabd2f", /* yellow  */
-//    "#83a598", /* blue    */
-//    "#d3869b", /* magenta */
-//    "#8ec07c", /* cyan    */
-//    "#ebdbb2", /* white   */
-//
+static const char *colorname[] = {
+    /* 8 normal colors */
+	"#45475A",
+	"#F38BA8",
+	"#A6E3A1",
+	"#F9E2AF",
+	"#89B4FA",
+	"#F5C2E7",
+	"#94E2D5",
+	"#BAC2DE",
+
+	/* 8 bright colors */
+	"#585B70",
+	"#F38BA8",
+	"#A6E3A1",
+	"#F9E2AF",
+	"#89B4FA",
+	"#F5C2E7",
+	"#94E2D5",
+	"#A6ADC8",
+
+[256] = "#CDD6F4", /* default foreground colour */
+[257] = "#1E1E2E", /* default background colour */
+[258] = "#F5E0DC", /*575268*/
+
 };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-//unsigned int defaultfg = 7;
-//unsigned int defaultbg = 0;
-//unsigned int defaultcs = 15;
-//unsigned int defaultrcs = 257;
+unsigned int defaultfg = 256;
+unsigned int defaultbg = 257;
+unsigned int defaultcs = 258;
+static unsigned int defaultrcs = 258;
 /*
  * Default shape of cursor
  * 2: Block ("█")

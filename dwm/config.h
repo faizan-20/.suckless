@@ -106,8 +106,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 
-//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };  // see line 1989 in dwm.c
-static const char *termcmd[]  = { "st", NULL };
+static const char *dmenucmd[] = { "dmenu_run", NULL };  // see line 1989 in dwm.c
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static const char *scratchpadcmd[]  = {"s", "st", "-t", "scratchpad", NULL};
 static const char *htopcmd[]		= {"g", "st", "-t", "htopcmd", "-e", "gotop", NULL};
@@ -118,8 +118,8 @@ static const char *pulsemixercmd[]	= {"p", "st", "-t", "pulsemixercmd", "-e", "p
 static Key keys[] = {
 	/*Standard*/
 	/* modifier                     key        function        argument */
-	//{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun -show-icons") },
+	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	//{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun -show-icons") },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_a,      togglescratch,  {.v = pulsemixercmd } },
 	{ MODKEY,                       XK_s,      togglescratch,  {.v = htopcmd } },
@@ -158,24 +158,27 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 
 	/*Applications*/
-	{ ControlMask,			XK_Print,  spawn,		SHCMD("flameshot gui") },
+	{ 0,			XK_Print,  spawn,		SHCMD("flameshot gui") },
 	{ MODKEY|ShiftMask,		XK_w,	   spawn,		SHCMD("brave") },
         { MODKEY,	        	XK_w,	   spawn,		SHCMD("firefox") },
-	{ MODKEY,			XK_e,	   spawn,		SHCMD("thunar") },
+	{ MODKEY,			XK_e,	   spawn,		SHCMD("nautilus") },
 	{ MODKEY,			XK_r,	   spawn,		SHCMD("st -e ranger") },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,		SHCMD("blueman-manager") },
 	{ MODKEY|ShiftMask,		XK_x,	   spawn,		SHCMD("i3lock-fancy") },
 	{ MODKEY|ShiftMask,		XK_s,	   spawn,		SHCMD("env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify %U") },
 	{ MODKEY|ShiftMask,		XK_p,	   spawn,		SHCMD("killall picom") },
 	{ MODKEY,			XK_p,	   spawn,		SHCMD("picom --experimental-backends") },
-	{ MODKEY,                       XK_f,      spawn,		SHCMD("feh --bg-fill --randomize ~/Pictures/Wallpapers/Walls")},
+	{ MODKEY,                       XK_f,      spawn,		SHCMD("feh --bg-fill --randomize ~/Pictures/Wallpapers")},
 	{ MODKEY|ControlMask,           XK_s,      spawn,		SHCMD("rofi -show power-menu -modi power-menu:rofi-power-menu") },
 
 
 	/*Keyboard keys*/
-  { 0, XF86XK_AudioMute,			spawn,		SHCMD("pamixer -t; dunstify -r 2 -t 750 \"VOL:$(pamixer --get-volume-human)\"") },
-  { 0, XF86XK_AudioRaiseVolume,	    spawn,		SHCMD("pamixer --allow-boost -i 5; dunstify -r 2 -t 750 \" :$(pamixer --get-volume-human)\"") },
-  { 0, XF86XK_AudioLowerVolume,	    spawn,		SHCMD("pamixer --allow-boost -d 5; dunstify -r 2 -t 750 \" :$(pamixer --get-volume-human)\"") },
+  { 0, XF86XK_AudioMute,			spawn,		SHCMD("pactl set-sink-mute 0 toggle; dunstify -r 2 -t 750 \" :$(pactl list sinks | grep '^[[:space:]]Volume:' | \
+    head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')\"") },
+  { 0, XF86XK_AudioRaiseVolume,	    spawn,		SHCMD("pactl set-sink-volume 0 +5%; dunstify -r 2 -t 750 \" :$(pactl list sinks | grep '^[[:space:]]Volume:' | \
+    head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')\"") },
+  { 0, XF86XK_AudioLowerVolume,	    spawn,		SHCMD("pactl set-sink-volume 0 -5%; dunstify -r 2 -t 750 \" :$(pactl list sinks | grep '^[[:space:]]Volume:' | \
+    head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')\"") },
   { 0, XF86XK_MonBrightnessUp,	    spawn,		SHCMD("light -A 5; dunstify -r 2 -t 750 \" :$(light -G)\"") },
   { 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("light -U 5; dunstify -r 2 -t 750 \" :$(light -G)\"") },
 
